@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+}
+
+.vermelho {
+    background-color: tomato;
+}
+
+.verde {
+    background-color: greenyellow;
+}
