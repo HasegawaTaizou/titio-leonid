@@ -13,6 +13,7 @@ const getEstado = ({ target }) => {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log(data.cidades);
     return {
       uf: data.uf,
       nome: data.descricao,
@@ -23,14 +24,47 @@ const getEstado = ({ target }) => {
     console.log(item);
   });
 
-  const preencherDados = async () => {
-    const dadosCidades = await listarCidades(estado);
-    document.querySelector(".card__sigla").textContent = dadosCidades.uf;
-    document.querySelector(".card__title").textContent = dadosCidades.nome;
-    document.querySelector(".cidade").textContent = dadosCidades.cidades;
+  const dadosEstado = async (estado) => {
+    const url = `http://localhost:8080/estado/sigla/${estado}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return {
+      capital: data.capital,
+      regiao: data.regiao,
+    };
   };
 
+  dadosEstado(estado).then((item) => {
+    console.log(item);
+  });
+
+  const cidadesContainer = document.querySelector(".card__cidades-container");
+  const preencherDados = async () => {
+    const listaCidades = await listarCidades(estado);
+    const dadosDoEstado = await dadosEstado(estado);
+    document.querySelector(".card__sigla").textContent = listaCidades.uf;
+    document.querySelector(".card__title").textContent = listaCidades.nome;
+    document.querySelector(".capital__nome").textContent =
+      dadosDoEstado.capital;
+    document.querySelector(".regiao__nome").textContent = dadosDoEstado.regiao;
+    listaCidades.cidades.forEach((item) => {
+      const cidade = document.createElement("span");
+      cidade.textContent = item;
+      cidadesContainer.append(cidade);
+    });
+    console.log(cidadesContainer);
+  };
+
+  cidadesContainer.innerHTML = "";
   preencherDados();
 };
 
+const showTitle = function ({ target }) {
+  const nomeEstado = target.getAttribute("title");
+  console.log(nomeEstado);
+};
+
 mapa.addEventListener("click", getEstado);
+mapa.addEventListener("mouseover", showTitle);

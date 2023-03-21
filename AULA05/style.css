@@ -5,6 +5,7 @@
 }
 
 body {
+  font-family: "Inter", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,4 +95,7 @@ path:hover {
 .card__cidades-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  max-height: 200px;
+  height: 100%;
+  overflow-y: scroll;
 }
