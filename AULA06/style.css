@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    background-color: tomato;
+}
+
+.card-container {
+    display: flex;
+    gap: 12px;
+}
